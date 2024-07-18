@@ -1,0 +1,51 @@
+import { View, Text, FlatList, Image, FlatListComponent } from 'react-native'
+import React, { useEffect } from 'react'
+import { db } from './../../config/FirebaseConfig'
+import { useState } from 'react';
+import { collection, getDocs, query } from 'firebase/firestore/lite';
+export default function Slider() {
+
+    const [slilderList,setSliderList]=useState([]);
+    useEffect(()=>{
+        GetSliderList();
+    },[]);
+    const GetSliderList=async()=>{
+        setSliderList([]);
+        const q=query(collection(db,'Slider'));
+        const querySnapshot=await getDocs(q);
+
+        querySnapshot.forEach((doc) => {
+            console.log(doc.data());
+            setSliderList(prev=>[...prev,doc.data()]);
+        })
+    }
+  return (
+    <View>
+      <Text style={{
+        fontFamily:'montserrat-bold',
+        fontSize:20,
+        paddingLeft:20,
+        paddingTop:20,
+        marginBottom:5
+      }}>
+        #special for you
+      </Text>
+      <FlatList 
+      data={slilderList}
+      horizontal={true}
+      showsHorizontalScrollIndicator={false}
+      style={{paddingLeft:20}}
+      renderItem={({item,index})=>(
+        <Image source={{uri:item.imageUrl}}
+        style={{
+          width:300,
+          height:150,
+          borderRadius:15,
+          marginRight:15
+        }}
+        />
+      )}
+      />
+    </View>
+  )
+}
