@@ -3,7 +3,7 @@ import React, { useState } from 'react'
 import { Colors } from '../../constants/Colors';
 import { Rating } from 'react-native-ratings';
 
-export default function Reviews() {
+export default function Reviews( {business} ) {
     const [rating,setRating]=useState(4);
     const [userInput,setUserInput]=useState();
   return (

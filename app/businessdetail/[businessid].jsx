@@ -36,7 +36,7 @@ export default function BusinessDetail() {
     }
   }
   return (
-    <View>
+    <ScrollView>
       {loading?
       <ActivityIndicator
       style={{
@@ -45,7 +45,7 @@ export default function BusinessDetail() {
       size={'large'}
       color={Colors.PRIMARY}
       />:
-      <ScrollView>
+      <View>
         {/* Intro */}
         <Aintro business={business}/>
          {/* Action Button */}
@@ -54,8 +54,8 @@ export default function BusinessDetail() {
           <About business={business}/>
           {/* Review section */}
           <Reviews business={business}/>
-      </ScrollView>
+      </View>
     }
-    </View>
+    </ScrollView>
   )
 } 
